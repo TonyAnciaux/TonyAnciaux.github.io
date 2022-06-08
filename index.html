@@ -1,0 +1,725 @@
+<!DOCTYPE HTML>
+<!--
+	Dimension by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Tony Anciaux - Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="logo">
+							<span class="icon fa-solid fa-wave-square"></span>
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h1>Tony Anciaux</h1><br>
+								<h3>Welcome to my portfolio!</h3>
+								<p></p><br>
+								<p>Here you can find some of my data science<br>
+								and machine learning projects on Python.<br><br>
+								This portfolio is still under development, <br>
+								feel free to visit again later.<br></p>
+							</div>
+						</div>
+						<nav>
+							<ul>
+								<li><a href="#about">About Me</a></li>
+								<li><a href="Tony_Anciaux_Data_science_intern.pdf" target="_blanck">Resume</a></li>
+								<li><a href="#projects">Projects</a></li>
+								<li><a href="#contact">Contact</a></li>
+							</ul>
+						</nav>
+					</header>
+
+
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- About Me -->
+							<article id="about">
+								<h2 class="major">About Me</h2>
+								<img src="images/ID.jpg" img style="border:1px solid white;" alt="Profile Picture" border=1/>
+								<br><br>
+								<p align="justify">From a fully non-technical background, I am currently in the middle of a career transformation and following an intensive Data Science bootcamp training at <a href="https://www.becode.org">BeCode</a>. Their <b>self-learning-by-doing</b> pedagogy was the perfect match to feed my eager to learn, gain and improve my skills in the vast and rapidly growing world of Data Science.
+								</p>
+
+								<p align="justify">I'm passionate about data and its potential to drive insights and decision making in various industries and businesses. I'm specifically enthusiastic about technologies and projects involving Computer Vision and Natural Language Processing. 
+								</p>
+
+								<p align="justify">As a first opportunity to set a foot in the field, I'm currently looking for a <b>Data Science internship</b> position. I'm also always interested in meeting new people with common interests and collaborating on various projects so feel free to reach out through the <a href="contact">contact</a> page if you want to exchange about a common interest.
+								</p>
+
+								<p align="center">
+									<ul class="icons">
+										<li><a href="https://www.linkedin.com/in/tonyanciaux/" target="_blank" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+										<li><a href="https://github.com/TonyAnciaux" target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+										<li><a href="https://wa.me/+32476242782" target="_blank" class="icon brands fa-whatsapp"><span class="label">Whatsapp</span></a></li>
+									</ul>
+								</p>
+							</article>
+
+
+
+						<!-- Projects -->
+							<article id="projects">
+								<h2 class="major">Projects</h2>
+
+							<br>
+
+							<p>
+								<nav>
+									<ul class="actions stacked" align="center">
+										<li><a href="#work3" class="button">Real Estate Price Prediction</a></li>
+										<li><a href="#work1" class="button">Computer Vision Snake Game</a></li>
+										<li><a href="#work2" class="button">3D Houses from LIDAR</a></li>
+									</ul>
+								</nav>
+							</p>
+
+								<br><br><br>
+
+
+
+								<h4>Currently ongoing projects:</h4>
+							<p>
+									<ul>
+										<li>AI Chatbot</li>
+										<li>Hand Writing Recognition</li>
+									</ul>
+							</p>
+							</article>
+
+
+
+
+
+						<!-- Computer Vision Snake Game< -->
+							<article id="work1">
+								<h2 class="major">Computer Vision Snake Game</h2>
+								<span class="image main"><img src="images/snake_game.png" img style="border:1px solid white;" alt="" /></span>
+
+								<h4>General Description</h4>
+								<p align="justify">	
+									In this adaptation of the classic game, the player controls the snake with their index finger through the webcam. The goal is to eat as many <b>Becode</b> logos popping on the screen as possible to make the snake grow. 
+								</p><br>
+
+								<h4>How It Works</h4>
+								<p align="justify">	
+
+									When the game is launched, it triggers a <i>while loop</i> that maintains the interface open and constantly listens to the webcam signal - allowing it to show on the screen - and to the keyboard; if the <b>"r"</b> key is pressed, the game resets. 
+									<br>
+									As soon as one hand is detected in the webcam (confidence of 0.8 with maximum one hand on the screen), a food object is instantiated at a random position in the playing area:
+								</p>
+
+
+									<pre><code>
+class Food:
+    def __init__(self, food_path):
+        self.food_image = cv2.imread(food_path, cv2.IMREAD_UNCHANGED)
+        self.height, self.width, _ = self.food_image.shape 
+        self.food_location = 0, 0
+        self.random_food_location()
+
+    def random_food_location(self):
+        self.food_location = random.randint(100, 1000), random.randint(100, 600)
+									</code></pre>
+
+
+								<p align="justify">
+									The tip of the player's index is what the head of the snake follows. Its position updates the coordinates of a <i>"current_head"</i> variable, passed to a <i>"previous_head"</i> variable, both of which help generate two lists: a list of previous index position coordinates and a list of distances between each of these points. The first one allows to draw the snake.  
+								</p>
+
+
+									<pre><code>
+if self.points:
+	for i, point in enumerate(self.points):
+		if i != 0:
+			cv2.line(img, self.points[i-1], self.points[i], (255, 0, 0), 15)
+		cv2.circle(img, self.points[-1], radius=15, color=(255, 0, 0), thickness=cv2.FILLED)
+									</code></pre>
+
+
+								<p align="justify">
+									The sum of all the lengths of the latter is compared with a <i>"maximum_length"</i> initial variable. When it exceeds this value, the oldest point and oldest segment (on index 0) are popped out of their respective lists. 
+								</p>
+
+
+									<pre><code>
+if self.current_length > self.maximum_length:
+	for i, length in enumerate(self.segments):
+	    self.current_length -= length
+	    self.segments.pop(i)
+	    self.points.pop(i)
+	    if self.current_length < self.maximum_length:
+	        break
+	        						</code></pre>
+
+
+
+								<p align="justify">
+									While the hand in the screen, the position of the index is compared with the rest of the snake body to check for collisions. To construct this function, the list of position points of the snake is converted into an array then passed into OpenCV methods to check for its distance. If between <b>-1</b> and <b>1</b> pixel, the function returns <code>True</code> and the game stops. 
+								</p>
+
+
+									<pre><code>
+if hands:
+    landmark = hands[0]["lmList"]
+    tip_index = landmark[8][0:2] 
+    if snake.check_for_collision(main_img):
+        score.game_over(main_img)
+    else:
+        snake.update(main_img, tip_index)
+        							</code></pre>
+
+
+        							<pre><code>
+def check_for_collision(self, img):
+    pts = np.array(self.points[:-2], np.int32)
+    pts = pts.reshape((-1, 1, 2))
+    cv2.polylines(img, [pts], isClosed=False, color=(200, 0, 0), thickness=15)
+    distance = cv2.pointPolygonTest(pts, self.current_head, measureDist=True)
+    if - 1 < distance < 1:
+        return True
+        							</code></pre>
+
+
+								<p align="justify">
+									Finally, the <code>score.py</code> file contains the functions updating the player's score everytime they eat a new cookie and displays the final scoreboard when the game is over.
+								</p>
+								<br>
+
+								<h4>Tools and technologies</h4>
+
+								<p>Python | OOP | Computer Vision
+									<ul>
+										<li>NumPy</li>
+										<li>Math</li>
+										<li>Time</li>
+										<li>Random</li>
+										<li>OpenCV</li>
+										<li>CVZone</li>
+									</ul>	
+								</p>
+								<br>
+
+								<h4>Extras</h4>
+								<p>	For demonstration purposes, the repository also contains:
+									<ul>
+										<li>A separated hand detection script</li>
+										<li>A separated face and features detection script</li>
+									</ul>
+								</p>
+								<br>
+
+								<h4>Future Developments</h4>
+								<p align="justify">	<ul>
+										<li>Setting up a highest Score Board</li>
+										<li>Game Over when hitting the border of screen as well</li>
+										<li>Setting options: starting lenght, colors, different choices of cookie design</li>
+									</ul>	
+								</p>
+								<br>
+
+								<p><h3><a href="https://github.com/TonyAnciaux/cv-snake-game">Project Github Repository</a></h3></p>
+							</article>
+
+
+
+
+						<!-- 3D Projection from GeoTIFF -->
+							<article id="work2">
+								<h2 class="major">3D Houses from LIDAR</h2>
+								<span class="image main"><img src="images/3d_houses.png" img style="border:1px solid white;" alt="" /></span>
+
+								<h4>General Description</h4>
+								<p>
+									Learning project consisting in plotting 3D representation of houses through the simple input of an address. 
+								</p>
+								<br>
+
+								<h4>How It Works</h4>
+								<p>
+									 After user inputs the desired address of the house, the program contacts the geopy API to fetch the proper GPS coordinates. 
+									<br>
+									Those are then converted into the proper projection system (<b>EPSG:31370 - Belgian Lambert 72</b> in this case). 
+								</p>
+
+									<pre><code>
+def address_to_crs(address: str):
+    geopy.geocoders.ArcGIS()
+    geolocator = Nominatim(user_agent="ArcGIS")
+    location = geolocator.geocode(f"{address}")
+    latitude = location.latitude
+    longitude = location.longitude
+    transformer = Transformer.from_crs("EPSG:4326", crs_to="EPSG:31370", always_xy=False)
+    x, y = transformer.transform(latitude, longitude)
+    tiff_finder(x, y)
+        							</code></pre>
+
+        						<p>
+        							These new coordinates can now be used to find the appropriate LIDAR data. To achieve this, they are compared with the bounding boxes coordinates inside the GeoTIFF files. 
+        							<br>
+        							Once the altitudes matching the latitute and longitude projected coordinates are found, their value are added on an empty Numpy Array of dimension (200, 200). 
+        							<br>
+        							It is finally used to render a 3D plot of the altitudes with Plotly.
+        							
+        						</p>
+
+        						<pre><code>
+def tiff_finder(x: float, y: float):
+    paths = Path("./Data").glob("**/*.tif")
+    loc = np.zeros((200, 200))
+    for path in paths:
+        with rasterio.open(path) as fd:
+            if fd.bounds.left <= x <= fd.bounds.right:
+                if fd.bounds.bottom <= y <= fd.bounds.top:
+                    radius = 100
+                    left, bottom, right, top = (
+                        x - radius,
+                        y - radius,
+                        x + radius,
+                        y + radius,
+                    )
+                    crop = fd.read(
+                        1,
+                        window=rasterio.windows.from_bounds(
+                            left, bottom, right, top, fd.transform
+                        ),
+                    )
+                    loc += crop
+    fig = go.Figure(data=[go.Surface(z=loc)])
+    fig.update_scenes(yaxis_autorange="reversed")
+    fig.show()
+        						</code></pre>
+
+								<h4>Tools and Technologies</h4>
+
+								<p>Python | OOP | GeoTIFF | Rasters | Data Visualization
+									<ul>
+										<li>NumPy</li>
+										<li>Geopy</li>
+										<li>Plotly</li>
+										<li>Pyproj</li>
+										<li>Rasterio</li>
+									</ul>	
+								</p>
+								<br>
+
+								<h4>Future Developments</h4>
+								<p align="justify">	<ul>
+										<li>Tkinter or Kivy GUI</li>
+										<li>Data for the whole Belgium</li>
+										<li>Color map selection for 3D graphs</li>
+										<li>Toggle with/without Canopy Height Model</li>
+										<li>Visualizing only targetted house/building</li>
+									</ul>	
+								</p>
+								<br>
+
+								<p><h3><a href="https://github.com/TonyAnciaux/3D_houses">Project Github Repository</a></h3></p>
+							</article>
+
+
+
+						<!-- WORK 3 -->
+							<article id="work3">
+								<h2 class="major">Real Estate Price Prediction</h2>
+								<span class="image main"><img src="images/price_prediction.png" img style="border:1px solid white;" alt="" /></span>
+								
+								<h4>General Description</h4>
+								<p>
+									API using a linear regression model to predict prices of real-estate in Beligum based on a variety of criterias. 
+								</p><br>
+
+								<h4>How It Works</h4>
+								<p>
+									First, approximately 18000 observations were scrapped from a famous real estate website. Price being identified as the target, the information from the website needed to be sorted in different features: property type, area, type of kitchen, the garden area if any, the number of facades, the general state, etc. 
+									The whole set was saved into a <code>pandas.DataFrame</code> for more conveniance for the following operations. 
+								</p>
+								<br>
+								<p>
+									Data preparation: 
+									<ul>
+										<li>Remove duplicate observations and irrelevant ones</li>
+										<li>Feature selection to remove constant features, correlated ones to avoid <b>multicollinearity</b> (a correlation heatmap was used to highlight them)</li>
+										<li>Handling missing values: removing rows missing important data (no price, no area), replacing empty values with the median of all the other values of the column if continuous (ex.: surface), a <i>0</i> if meant to indicate absence (example: no garden), assuming some default values <i>1</i> for others (ex.: if no indication, it was always assumed there was at least one bathroom)</li><br>
+
+									<pre><code>
+def mean_val(ref_col, target_col):
+    ratios = target_col.divide(ref_col)
+    mean = ratios.mean()
+    default_values = ref_col.map(lambda x: x * mean, na_action="ignore")
+    return target_col.fillna(default_values)
+
+def none_to_default(value, default):
+    if pd.isna(value):
+        return default
+    else:
+        return value
+        							</code></pre>
+
+        								<li>Filter unwanted outliers: exceptional real estate (size, price, number of rooms) require a separate model due to their nature. The statistical <b>Interquartile Range Method</b> was used to remove them from the final dataset</li>
+										<li>feature engineering</li>
+										<li>One-Hot-Encoding for categorical data</li>
+										<li>Normalization (tests were conducted for two methods: <code>MinMaxScaler</code> and <code>StandardScaler</code>, the latter was showing slightly better results)</li>
+									</ul>	
+								</p><br>
+
+
+								<p>
+									The next step was to separate the data into a training and testing sets (0.8 / 0.2) using the <code>scikit-learn</code> dedicated function and testing different models; linear, multilinear and polynomial regressions. 
+								</p>
+								<p>
+									The first one showed an <b>R-squared</b> of slightly under 55% while the polynomial model showed results above 60% with less features. 
+
+								<span class="image main"><img src="images/poly_img.png" alt="" /></span>
+								</p>
+
+
+
+								<h4>Tools and Technologies</h4>
+
+								<p>Python | Data Scraping | Data Cleaning | Feature Engineering | Visualization | Linear Regression | API | Containerisation 
+									<ul>
+										<li>NumPy</li>
+										<li>Pandas</li>
+										<li>Matplotlib</li>
+										<li>Seaborn</li>
+										<li>Scikit-learn</li>
+										<i>Flask</i>
+										<li>Dokker</li>
+										<i>Heroku</i>
+										<i></i>
+									</ul>	
+								</p>
+
+								<p><h3><a href="https://github.com/TonyAnciaux/challenge-api-deployment">Project Github Final Repository</a></h3></p>
+							</article>
+
+
+
+
+
+
+
+						<!-- Contact -->
+							<article id="contact">
+								<h2 class="major">Contact</h2>
+								<p>Fill this form to send me an e-mail, should you feel interested in discussing a potential hire or a collaboration on a project.</p>
+								<form method="post" action="mailto:tonyanciaux@gmail.com">
+									<div class="fields">
+										<div class="field half">
+											<label for="name">Name</label>
+											<input type="text" name="name" id="name" />
+										</div>
+										<div class="field half">
+											<label for="email">Email</label>
+											<input type="text" name="email" id="email" />
+										</div>
+										<div class="field">
+											<label for="message">Message</label>
+											<textarea name="message" id="message" rows="4"></textarea>
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Send Message" class="primary" /></li>
+										<li><input type="reset" value="Reset" /></li>
+									</ul>
+								</form>
+								<p>
+									<ul class="icons">
+										<li><a href="https://www.linkedin.com/in/tonyanciaux/" target="_blank" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+										<li><a href="https://github.com/TonyAnciaux" target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+										<li><a href="https://wa.me/+32476242782" target="_blank" class="icon brands fa-whatsapp"><span class="label">Whatsapp</span></a></li>
+									</ul>
+								</p>
+							</article>
+
+
+
+						<!-- Elements -->
+							<article id="elements">
+								<h2 class="major">Elements</h2>
+
+								<section>
+									<h3 class="major">Text</h3>
+									<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
+									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
+									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
+									<hr />
+									<h2>Heading Level 2</h2>
+									<h3>Heading Level 3</h3>
+									<h4>Heading Level 4</h4>
+									<h5>Heading Level 5</h5>
+									<h6>Heading Level 6</h6>
+									<hr />
+									<h4>Blockquote</h4>
+									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
+									<h4>Preformatted</h4>
+									<pre><code>i = 0;
+
+while (!deck.isInOrder()) {
+    print 'Iteration ' + i;
+    deck.shuffle();
+    i++;
+}
+
+print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
+								</section>
+
+								<section>
+									<h3 class="major">Lists</h3>
+
+									<h4>Unordered</h4>
+									<ul>
+										<li>Dolor pulvinar etiam.</li>
+										<li>Sagittis adipiscing.</li>
+										<li>Felis enim feugiat.</li>
+									</ul>
+
+									<h4>Alternate</h4>
+									<ul class="alt">
+										<li>Dolor pulvinar etiam.</li>
+										<li>Sagittis adipiscing.</li>
+										<li>Felis enim feugiat.</li>
+									</ul>
+
+									<h4>Ordered</h4>
+									<ol>
+										<li>Dolor pulvinar etiam.</li>
+										<li>Etiam vel felis viverra.</li>
+										<li>Felis enim feugiat.</li>
+										<li>Dolor pulvinar etiam.</li>
+										<li>Etiam vel felis lorem.</li>
+										<li>Felis enim et feugiat.</li>
+									</ol>
+									<h4>Icons</h4>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+									</ul>
+
+									<h4>Actions</h4>
+									<ul class="actions">
+										<li><a href="#" class="button primary">Default</a></li>
+										<li><a href="#" class="button">Default</a></li>
+									</ul>
+									<ul class="actions stacked">
+										<li><a href="#" class="button primary">Default</a></li>
+										<li><a href="#" class="button">Default</a></li>
+									</ul>
+								</section>
+
+								<section>
+									<h3 class="major">Table</h3>
+									<h4>Default</h4>
+									<div class="table-wrapper">
+										<table>
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>Description</th>
+													<th>Price</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Item One</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item Two</td>
+													<td>Vis ac commodo adipiscing arcu aliquet.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item Three</td>
+													<td> Morbi faucibus arcu accumsan lorem.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item Four</td>
+													<td>Vitae integer tempus condimentum.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item Five</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr>
+													<td colspan="2"></td>
+													<td>100.00</td>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+
+									<h4>Alternate</h4>
+									<div class="table-wrapper">
+										<table class="alt">
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>Description</th>
+													<th>Price</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Item One</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item Two</td>
+													<td>Vis ac commodo adipiscing arcu aliquet.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item Three</td>
+													<td> Morbi faucibus arcu accumsan lorem.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item Four</td>
+													<td>Vitae integer tempus condimentum.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item Five</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr>
+													<td colspan="2"></td>
+													<td>100.00</td>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+								</section>
+
+								<section>
+									<h3 class="major">Buttons</h3>
+									<ul class="actions">
+										<li><a href="#" class="button primary">Primary</a></li>
+										<li><a href="#" class="button">Default</a></li>
+									</ul>
+									<ul class="actions">
+										<li><a href="#" class="button">Default</a></li>
+										<li><a href="#" class="button small">Small</a></li>
+									</ul>
+									<ul class="actions">
+										<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
+										<li><a href="#" class="button icon solid fa-download">Icon</a></li>
+									</ul>
+									<ul class="actions">
+										<li><span class="button primary disabled">Disabled</span></li>
+										<li><span class="button disabled">Disabled</span></li>
+									</ul>
+								</section>
+
+								<section>
+									<h3 class="major">Form</h3>
+									<form method="post" action="#">
+										<div class="fields">
+											<div class="field half">
+												<label for="demo-name">Name</label>
+												<input type="text" name="demo-name" id="demo-name" value="" placeholder="Jane Doe" />
+											</div>
+											<div class="field half">
+												<label for="demo-email">Email</label>
+												<input type="email" name="demo-email" id="demo-email" value="" placeholder="jane@untitled.tld" />
+											</div>
+											<div class="field">
+												<label for="demo-category">Category</label>
+												<select name="demo-category" id="demo-category">
+													<option value="">-</option>
+													<option value="1">Manufacturing</option>
+													<option value="1">Shipping</option>
+													<option value="1">Administration</option>
+													<option value="1">Human Resources</option>
+												</select>
+											</div>
+											<div class="field half">
+												<input type="radio" id="demo-priority-low" name="demo-priority" checked>
+												<label for="demo-priority-low">Low</label>
+											</div>
+											<div class="field half">
+												<input type="radio" id="demo-priority-high" name="demo-priority">
+												<label for="demo-priority-high">High</label>
+											</div>
+											<div class="field half">
+												<input type="checkbox" id="demo-copy" name="demo-copy">
+												<label for="demo-copy">Email me a copy</label>
+											</div>
+											<div class="field half">
+												<input type="checkbox" id="demo-human" name="demo-human" checked>
+												<label for="demo-human">Not a robot</label>
+											</div>
+											<div class="field">
+												<label for="demo-message">Message</label>
+												<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
+											</div>
+										</div>
+										<ul class="actions">
+											<li><input type="submit" value="Send Message" class="primary" /></li>
+											<li><input type="reset" value="Reset" /></li>
+										</ul>
+									</form>
+								</section>
+
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<br>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/tonyanciaux/" target="_blank" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="https://github.com/TonyAnciaux" target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+							<li><a href="https://wa.me/+32476242782" target="_blank" class="icon brands fa-whatsapp"><span class="label">Whatsapp</span></a></li>
+						</ul>
+						<p></p>	
+						<br>
+						<p></p>
+						<p class="copyright">&copy; Design adapted from an original <a href="https://html5up.net">HTML5 UP</a> template under the 
+							<a href="https://html5up.net/license">Creative Commons CCA 3.0</a> license.</p></p>
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg"></div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
