@@ -82,9 +82,11 @@
 							<p>
 								<nav>
 									<ul class="actions stacked" align="center">
+										<li><a href="#work4" class="button">Audio Delay Detection</a></li>
 										<li><a href="#work3" class="button">Real Estate Price Prediction</a></li>
 										<li><a href="#work1" class="button">Computer Vision Snake Game</a></li>
 										<li><a href="#work2" class="button">3D Houses from LIDAR</a></li>
+										
 									</ul>
 								</nav>
 							</p>
@@ -102,7 +104,7 @@
 								<h2 class="major">Computer Vision Snake Game</h2>
 								<span class="image main"><img src="images/snake_game.png" img style="border:1px solid white;" alt="" /></span>
 
-								<h4>General Description</h4>
+								<h4>Project Description</h4>
 								<p align="justify">	
 									In this adaptation of the classic game, the player controls the snake with their index finger through the webcam. The goal is to eat as many <b>Becode</b> logos popping on the screen as possible to make the snake grow. 
 								</p><br>
@@ -235,7 +237,7 @@ def check_for_collision(self, img):
 								<h2 class="major">3D Houses from LIDAR</h2>
 								<span class="image main"><img src="images/3d_houses.png" img style="border:1px solid white;" alt="" /></span>
 
-								<h4>General Description</h4>
+								<h4>Project Description</h4>
 								<p>
 									Learning project consisting in plotting 3D representation of houses through the simple input of an address. 
 								</p>
@@ -330,7 +332,7 @@ def tiff_finder(x: float, y: float):
 								<h2 class="major">House Price Prediction</h2>
 								<span class="image main"><img src="images/price_prediction.png" img style="border:1px solid white;" alt="" /></span>
 								
-								<h4>General Description</h4>
+								<h4>Project Description</h4>
 								<p>
 									API using a multiple linear regression model to predict prices of real-estate in Beligum based on a variety of criterias. 
 								</p><br>
@@ -369,7 +371,7 @@ def none_to_default(value, default):
 									</ul>	
 								</p><br>
 
-
+								<br>
 								<p>
 									
 								Model Selection: 
@@ -383,11 +385,11 @@ def none_to_default(value, default):
 								<span class="image main"><img src="images/poly_img.png" alt="" /></span>
 									
 									The multinear had close results and was chosen above Polynomial for performance concerns. 
-								</p>
+								</p><br><br>
 
 								
 								
-
+								
 								<p>
 								
 								Deployment:
@@ -395,7 +397,7 @@ def none_to_default(value, default):
 								<p>
 									Use of Docker to containerise the trained model an Heroku for deployment as a micro-service app accessible through API. 
 									Tests were conducted with Postman to check if the API was responsive and results as expected. 
-</p>
+</p><br>
 								
 
 
@@ -415,10 +417,56 @@ def none_to_default(value, default):
 										<i></i>
 									</ul>	
 								</p>
-								<p><h3><a href="https://github.com/TonyAnciaux/realestate-data-scraping">Project Github - Real Estate Data Scraping</a></h3></p>
-								<p><h3><a href="https://github.com/TonyAnciaux/Immo_Eliza_Regression">Project Github - Feature Engineering and Regression</a></h3></p>
-								<p><h3><a href="https://github.com/TonyAnciaux/challenge-api-deployment">Project Github - Final API Repository</a></h3></p>
+								<h3><a href="https://github.com/TonyAnciaux/realestate-data-scraping">Project Github - Real Estate Data Scraping</a></h3><br>
+								<h3><a href="https://github.com/TonyAnciaux/Immo_Eliza_Regression">Project Github - Feature Engineering and Regression</a></h3><br>
+								<h3><a href="https://github.com/TonyAnciaux/challenge-api-deployment">Project Github - Final API Repository</a></h3><br>
 							</article>
+
+
+
+
+
+
+
+
+						<!-- Audio Delay Detection -->
+							<article id="work4">
+								<h2 class="major">Audio Delay Detection</h2>
+								<span class="image main"><img src="images/price_prediction.png" img style="border:1px solid white;" alt="" /></span>
+								
+								<h4>Project Description</h4>
+								<p>
+									This project was developped to help UCL Neuroscience department to automate measures of delay in audio recording of patients suffering from stuttering. 
+									These measures are used to evaluate patient's progresses and therapeutical protocoles. 
+									It was realised in collaboration with Yasser Barona for the user interface. 
+								</p><br>
+								
+								
+								<h4>How It Works</h4>
+								<p>The audio files were structured as follow:
+									<li>Each recorded session was 12 seconds long</li>
+									<li>The first 5 seconds were the metronome at 4 ticks per seconds</li>
+									<li>The patient was required to make a sound (<i>"TA"</i>) after the 2 first "ticks" and try to follow the same rythm once the metronome stops</li>
+									
+								<br>
+									A virtual metronome sound file was used to find default position of the ticks. 
+									Using a peak-detection algorithm, the position of each tick is saved then aligned aligned with the first 5 seconds of the audio recording.
+									<p>
+										
+										
+										
+									
+									
+									
+									
+									
+								</p><br>
+									
+								
+								
+								
+								
+								<h3><a href="https://github.com/TonyAnciaux/ucl-audio-delay-detection">Project Github Repository</a></h3><br>
 
 
 
