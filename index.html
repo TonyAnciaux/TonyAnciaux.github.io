@@ -386,8 +386,6 @@ def none_to_default(value, default):
 									
 									The multinear had close results and was chosen above Polynomial for performance concerns. 
 								
-
-								<span class="image main"><img src="images/sound_signals.png" alt="" /></span>
 									
 								</p><br><br>
 								
@@ -450,13 +448,16 @@ def none_to_default(value, default):
 									<li>The patient was required to make a sound (<i>"TA"</i>) after the 2 first "ticks" and try to follow the same rythm once the metronome stops</li>
 									
 								<br>
-									A virtual metronome sound file was used to create a list with the positions of reference of the ticks. A <b>Librosa</> dedicated module using a peak-detection algorithm was used. 
+									A virtual metronome sound file was used to create a list with the positions of reference of the ticks. A <b>Librosa</b> dedicated module using a peak-detection algorithm was used. 
 								</p>
 								<p>
 									Due to recording conditions, <b>Librosa</b> failed at detecting all the peaks in patients' files. To bypass this issue and to avoid missing patients' "peaks" (i.e. when they were producing the required sound), a peak-detection algorithm was written from scratch using simple constrains;
 									as long as the sound signal was going up, the peak was not reached. Once it would go down, the latest high position was considered a peak if it was not too close from the previous one. After a few tweaking of the parameters of "distance" between sounds, 
 									it managed to find all the peaks. 
-								</p>
+								
+								<span class="image main"><img src="images/sound_signals.png" alt="" /></span>
+									
+									</p>
 								<p> 
 									To make the comparison between the metronome reference file and the patients' recordings coordinates, the coordinates of the first one was aligned with the first 5 seconds peaks of the latter (i.e. where the metronome was audible in the patients' recording).
 									This step was primordial and constrained due to some recordings starting with up to 2 seconds of silence. Failing to do so would have given misleading results. 
@@ -471,6 +472,7 @@ def none_to_default(value, default):
 								</p>
 								<p> My colleague <b>Yasser Barona</b> implemented my code in a <b>Streamlit</b> interface to demonstrate the results to the Research Team of <b>Université Catholique de Louvain</b>.
 									Simplicity of use was the target; a simple form in which the user inputs 1 or a batch of sound files. Once the files submitted and the computations processed, the application outputs a csv with information such as peak-position, metronome position, patient position, RMSE for each peak, global RMSE. 
+								
 									
 								</p><br>
 								
