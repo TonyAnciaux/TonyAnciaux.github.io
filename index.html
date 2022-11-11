@@ -315,7 +315,7 @@ def tiff_finder(x: float, y: float):
 										<li>Data for the whole Belgium</li>
 										<li>Color map selection for 3D graphs</li>
 										<li>Toggle with/without Canopy Height Model</li>
-										<li>Visualizing only targetted house/building</li>
+										<li>Visualizing only targetting specified house/building instead of area</li>
 									</ul>	
 								</p>
 								<br>
@@ -325,19 +325,19 @@ def tiff_finder(x: float, y: float):
 
 
 
-						<!-- WORK 3 -->
+						<!-- House Price Prediction -->
 							<article id="work3">
-								<h2 class="major">Real Estate Price Prediction</h2>
+								<h2 class="major">House Price Prediction</h2>
 								<span class="image main"><img src="images/price_prediction.png" img style="border:1px solid white;" alt="" /></span>
 								
 								<h4>General Description</h4>
 								<p>
-									API using a linear regression model to predict prices of real-estate in Beligum based on a variety of criterias. 
+									API using a multiple linear regression model to predict prices of real-estate in Beligum based on a variety of criterias. 
 								</p><br>
 
 								<h4>How It Works</h4>
 								<p>
-									First, approximately 18000 observations were scrapped from a famous real estate website. Price being identified as the target, the information from the website needed to be sorted in different features: property type, area, type of kitchen, the garden area if any, the number of facades, the general state, etc. 
+									First, approximately 18000 observations were scrapped from a popular real estate website. Price being identified as the target, the information from the website needed to be sorted in different features: property type, area, type of kitchen, the garden area if any, the number of facades, the general state, etc. 
 									The whole set was saved into a <code>pandas.DataFrame</code> for more conveniance for the following operations. 
 								</p>
 								<br>
@@ -347,7 +347,7 @@ def tiff_finder(x: float, y: float):
 										<li>Remove duplicate observations and irrelevant ones</li>
 										<li>Feature selection to remove constant features, correlated ones to avoid <b>multicollinearity</b> (a correlation heatmap was used to highlight them)</li>
 										<li>Handling missing values: removing rows missing important data (no price, no area), replacing empty values with the median of all the other values of the column if continuous (ex.: surface), a <i>0</i> if meant to indicate absence (example: no garden), assuming some default values <i>1</i> for others (ex.: if no indication, it was always assumed there was at least one bathroom)</li><br>
-
+										<li>Feature Engineering: textual data transformed into numerical ordinal values (kitchen equipment, building state) or one-hot-encoded for nomial values (province, property type)
 									<pre><code>
 def mean_val(ref_col, target_col):
     ratios = target_col.divide(ref_col)
@@ -365,25 +365,43 @@ def none_to_default(value, default):
         								<li>Filter unwanted outliers: exceptional real estate (size, price, number of rooms) require a separate model due to their nature. The statistical <b>Interquartile Range Method</b> was used to remove them from the final dataset</li>
 										<li>feature engineering</li>
 										<li>One-Hot-Encoding for categorical data</li>
-										<li>Normalization (tests were conducted for two methods: <code>MinMaxScaler</code> and <code>StandardScaler</code>, the latter was showing slightly better results)</li>
+										<li>Normalization: tests were conducted for two methods: <code>MinMaxScaler</code> and <code>StandardScaler</code>, the latter was showing slightly better results</li>
 									</ul>	
 								</p><br>
 
 
 								<p>
+									
+								Model Selection: 
+									
+									
 									The next step was to separate the data into a training and testing sets (0.8 / 0.2) using the <code>scikit-learn</code> dedicated function and testing different models; linear, multilinear and polynomial regressions. 
 								</p>
 								<p>
 									The first one showed an <b>R-squared</b> of slightly under 55% while the polynomial model showed results above 60% with less features. 
 
 								<span class="image main"><img src="images/poly_img.png" alt="" /></span>
+									
+									The multinear had close results and was chosen above Polynomial for performance concerns. 
 								</p>
+
+								
+								
+
+								<p>
+								
+								Deployment:
+									
+									Use of Docker to containerise the trained model an Heroku for deployment as a micro-service app accessible through API. 
+									Tests were conducted with Postman to check if the API was responsive and results as expected. 
+
+								
 
 
 
 								<h4>Tools and Technologies</h4>
 
-								<p>Python | Data Scraping | Data Cleaning | Feature Engineering | Visualization | Linear Regression | API | Containerisation 
+								<p>Python | Data Scraping | Data Cleaning | Feature Engineering | Visualization | Linear Regression | Multilinear Regression | Polynomial Regression | API | Containerisation 
 									<ul>
 										<li>NumPy</li>
 										<li>Pandas</li>
@@ -396,8 +414,9 @@ def none_to_default(value, default):
 										<i></i>
 									</ul>	
 								</p>
-
-								<p><h3><a href="https://github.com/TonyAnciaux/challenge-api-deployment">Project Github Final Repository</a></h3></p>
+								<p><h3><a href="https://github.com/TonyAnciaux/realestate-data-scraping">Project Github - Real Estate Data Scraping</a></h3></p>
+								<p><h3><a href="https://github.com/TonyAnciaux/Immo_Eliza_Regression">Project Github - Feature Engineering and Regression</a></h3></p>
+								<p><h3><a href="https://github.com/TonyAnciaux/challenge-api-deployment">Project Github - Final API Repository</a></h3></p>
 							</article>
 
 
