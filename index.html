@@ -82,6 +82,7 @@
 							<p>
 								<nav>
 									<ul class="actions stacked" align="center">
+										<li><a href="#work5" class="button">Fake News Classifier</a></li>
 										<li><a href="#work4" class="button">Audio Delay Detection</a></li>
 										<li><a href="#work3" class="button">Real Estate Price Prediction</a></li>
 										<li><a href="#work1" class="button">Computer Vision Snake Game</a></li>
@@ -493,6 +494,106 @@ def none_to_default(value, default):
 								
 								
 								<h3><a href="https://github.com/TonyAnciaux/ucl-audio-delay-detection">Project Github Repository</a></h3><br>
+</article>
+
+
+
+
+
+
+
+
+						<!-- Fake News Classifier -->
+							<article id="work5">
+								<h2 class="major">Fake News Classifier</h2>
+								
+								<h4>Project Description</h4>
+								<p>
+									This Fake News Detection system was built in the context of deepening my understanding and practice of NLP Pipeline. 
+									The <b>word2vec-google-news-300</b> pre-trained model from <b>Gensim</b> library was used for word and sentence embeddings. 
+									This pre-trained model was trained on approximately 100 billion words and contains around 300 million vectors. 
+								</p><br>
+								
+								<h4>How It Works</h4>
+								<p>
+									Using the Fake News Dataset from Kaggle, the first step was to prepare the data itself. 
+									For more convenience, the two csv files (one for the fake news, the other for the real news) were concatenated in a 
+									single Pandas DataFrame and only the necessary columns were kept: the content of the articles and their labels. 
+									These were mapped in an additional column with numerical values; 0 for fake news, 1 for real news. </p><br>
+								
+								<p>
+									As our pretrained model requires a vector of a specific shape (<i>(300,)</i>), a function will transform the content of our articles using the 
+									<b>SpaCy</b> Large English Pipeline. It contains a vocabulary of over half a million words and has strong NER (Name Entity Recognition) and POS (Part of Speech) abilities. 
+									The function follows these steps:
+									<li>Tokenize: each word of the text is isolated as a separate element of a list, becoming a single object denoted <i>token</i></li>
+									<li>Filter out tokens that are either <i>punctuation</i> or a <i>stop word</i> as they would only add noise to our vectors</li>
+									<li>Lemmatize the tokens: the words are converted into their meaningful common forms (<i>lemma</i>) through vocabulary and morphological analysis (ex.: was -> be, better -> good)</li>
+									<i>Vectorize our tokens: through a semantic representation of our tokens (Word2Vec), the <b>Gensim</b> model will create a mathematical average (Sent2Vec) of the complete text for each article to be able to 
+									depict the relashionships between sentences, and words inside our documents. This process is called Sentence Embedding</i>
+								</p>
+								
+								<pre><code>
+def preprocess_and_vectorize(text):
+	doc = nlp(text)
+	filtered_token = list()
+	for token in doc:
+		if token.is_punct or token.is_stop:
+			continue
+		filtered_token.append(token.lemma_)
+	return wv.get_mean_vector(filtered_token)
+								</code></pre>
+								
+								<br>
+								<p>
+									After applying this function to each row of our DataFrame, we can train our <b>Gradient Boosting Classifier</b> model. 
+									As usual, we first split the data in a train set and a test set then reshape it in a 2D vector to before fitting the model. </p>
+								
+								
+								<pre><code>
+X_train, X_test, y_train, y_test = train_test_split(
+	df["vector"].values,
+	df["label_num"],
+	test_size=0.2,
+	random_state=42,
+	stratify=df["label_num"]
+	)
+
+X_train_2d = np.stack(X_train)
+X_test_2d = np.stack(X_test)
+								</code></pre>
+								
+								
+								<p>
+									The <b>Gradient Boosting Classifier</b> is an Ensemble Method. Instead of using a single predictor, multiple predictors with poor accuracy 
+									and their results are aggregated, usually allowing for a model with better accuracy. Boosting is a special type of Ensemble Learning technique 
+									that, instead of fitting a predictor on the data at each iteration, actually itteratively fits a new predictor to the residual errors made by the previous predictor.</p>
+								<br>
+								<p>
+									We can now make prediction on our test set and return a classification report as well as plot a confusion matrix. </p>
+								
+								<span class="image main"><img src="confusion_matrix.png" alt="" /></span>
+								
+								
+								
+								
+								<h4>Tools and Technologies</h4>
+
+								<p>Python | NLP | word2vec | Gradient Boosting Classifier | Tokenization | Lemmatization    
+									<ul>
+										<li>NumPy</li>
+										<li>Pandas</li>
+										<li>Matplotlib</li>
+										<li>Seaborn</li>
+										<li>Scikit-learn</li>
+										<li>Spacy</li>
+										<li>Gensim</li>
+									</ul>	
+								</p>
+
+								<h3><a href="https://github.com/TonyAnciaux/fake_news_gensim">Project Github Repository</a></h3><br>
+								
+								
+								
 </article>
 
 
